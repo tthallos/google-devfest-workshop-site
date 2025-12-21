@@ -1,0 +1,147 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: string;
+    author: string;
+    tags?: string[];
+  };
+}
+
+const { frontmatter } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <article class="blog-post">
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime={frontmatter.pubDate}>{formattedDate}</time>
+        <span class="separator">·</span>
+        <span class="author">{frontmatter.author}</span>
+      </div>
+      <h1 class="post-title">{frontmatter.title}</h1>
+      <p class="post-description">{frontmatter.description}</p>
+      {frontmatter.tags && (
+        <div class="post-tags">
+          {frontmatter.tags.map(tag => (
+            <span class="tag">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="post-content">
+      <slot />
+    </div>
+
+    <footer class="post-footer">
+      <a href={base} class="back-link">← 返回首页</a>
+    </footer>
+  </article>
+
+  <style>
+    .blog-post {
+      max-width: 100%;
+    }
+
+    .post-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--color-text-tertiary);
+      margin-bottom: 1rem;
+    }
+
+    .separator {
+      color: var(--color-border-strong);
+    }
+
+    .post-title {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .post-description {
+      font-size: 1.2rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      background: var(--color-bg-tertiary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid var(--color-border);
+    }
+
+    .post-content {
+      font-size: 1.05rem;
+    }
+
+    .post-content :global(h2) {
+      margin-top: 2.5rem;
+    }
+
+    .post-content :global(h3) {
+      margin-top: 2rem;
+    }
+
+    .post-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .back-link {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--color-accent);
+      transform: translateX(-4px);
+    }
+
+    @media (max-width: 640px) {
+      .post-title {
+        font-size: 1.75rem;
+      }
+
+      .post-description {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</BaseLayout>

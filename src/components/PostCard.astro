@@ -1,0 +1,116 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: string;
+  url: string;
+  tags?: string[];
+}
+
+const { title, description, pubDate, url, tags } = Astro.props;
+const formattedDate = new Date(pubDate).toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+});
+---
+
+<article class="post-card">
+  <a href={url} class="card-link">
+    <div class="card-header">
+      <time datetime={pubDate}>{formattedDate}</time>
+    </div>
+    <h3 class="card-title">{title}</h3>
+    <p class="card-description">{description}</p>
+    {tags && (
+      <div class="card-tags">
+        {tags.slice(0, 3).map(tag => (
+          <span class="tag">#{tag}</span>
+        ))}
+      </div>
+    )}
+    <span class="read-more">阅读全文 →</span>
+  </a>
+</article>
+
+<style>
+  .post-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    border-color: var(--color-primary);
+  }
+
+  .card-link {
+    display: block;
+    padding: 1.5rem;
+    text-decoration: none;
+    height: 100%;
+  }
+
+  .card-header {
+    margin-bottom: 0.75rem;
+  }
+
+  .card-header time {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-tertiary);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  .post-card:hover .card-title {
+    color: var(--color-accent);
+  }
+
+  .card-description {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    background: var(--color-bg-tertiary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+  }
+
+  .read-more {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-primary-light);
+    transition: color 0.2s;
+  }
+
+  .post-card:hover .read-more {
+    color: var(--color-accent);
+  }
+</style>

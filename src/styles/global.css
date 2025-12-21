@@ -1,0 +1,238 @@
+/* Blueprint Design Theme - 2025 Google DevFest Blog */
+
+:root {
+  /* Primary Colors - Blueprint Blue Tones */
+  --color-primary: #0066CC;
+  --color-primary-dark: #004C99;
+  --color-primary-light: #3399FF;
+  --color-primary-lighter: #66B3FF;
+  
+  /* Accent Colors */
+  --color-accent: #00CCFF;
+  --color-accent-secondary: #0099CC;
+  
+  /* Background Colors */
+  --color-bg-primary: #0A1929;
+  --color-bg-secondary: #0D2137;
+  --color-bg-tertiary: #132F4C;
+  --color-bg-elevated: #1E3A52;
+  
+  /* Text Colors */
+  --color-text-primary: #E7EBF0;
+  --color-text-secondary: #B2BAC2;
+  --color-text-tertiary: #6B7A90;
+  --color-text-link: #3399FF;
+  
+  /* Border & Grid Colors */
+  --color-border: #1E3A52;
+  --color-border-strong: #2E5A7D;
+  --color-grid: rgba(0, 153, 204, 0.1);
+  --color-blueprint-line: #0099CC;
+  
+  /* Semantic Colors */
+  --color-success: #00E676;
+  --color-warning: #FFB300;
+  --color-error: #FF3D00;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(0, 153, 204, 0.3);
+  
+  /* Typography */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  
+  /* Blueprint grid background */
+  background-image: 
+    linear-gradient(var(--color-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: -1px -1px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-mono);
+  color: var(--color-text-primary);
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 1.75rem;
+  color: var(--color-primary-light);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: var(--color-accent);
+}
+
+p {
+  margin-bottom: 1.25rem;
+  color: var(--color-text-secondary);
+}
+
+a {
+  color: var(--color-text-link);
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(0, 204, 255, 0.5);
+}
+
+/* Code blocks */
+pre {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+code {
+  font-family: var(--font-mono);
+  background: var(--color-bg-tertiary);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--color-accent);
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--color-text-primary);
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 3px solid var(--color-blueprint-line);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-secondary);
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Lists */
+ul, ol {
+  margin: 1rem 0 1.5rem 1.5rem;
+  color: var(--color-text-secondary);
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+li::marker {
+  color: var(--color-accent);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+th {
+  background: var(--color-bg-tertiary);
+  color: var(--color-primary-light);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+tr:hover {
+  background: var(--color-bg-tertiary);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+/* Horizontal Rule */
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-blueprint-line), transparent);
+  margin: 2rem 0;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-text-primary);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}

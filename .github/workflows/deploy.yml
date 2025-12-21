@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+on:
+  # 当推送到 master 分支时触发
+  push:
+    branches: [ master ]
+  # 允许手动触发部署
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 的权限，用于部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 只允许一个并发部署，跳过正在运行和最新队列之间的运行队列
+# 但是，不要取消正在进行的运行，让这些生产部署完成
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+      
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+        # 这个 Action 会自动：
+        # 1. 检测并安装正确的 Node.js 版本
+        # 2. 检测并使用正确的包管理器（npm/pnpm/yarn）
+        # 3. 安装依赖
+        # 4. 运行 npm run build 构建站点
+        # 5. 上传构建产物到 GitHub Pages
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

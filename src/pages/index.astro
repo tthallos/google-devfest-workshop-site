@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const posts = [
+  {
+    title: 'Google Antigravity：当 AI 学会了写代码',
+    description: '在 2025 年的 Google DevFest 上，我见证了 Google Antigravity 的发布——一个 AI 驱动的 IDE，它不仅能写代码，还能理解你的意图。这让我想起王小波说的：人的一切痛苦，本质上都是对自己无能的愤怒。现在，AI 来解救我们的无能了。',
+    pubDate: '2025-12-21',
+    url: `${base}/blog/google-antigravity-ai-products`,
+    tags: ['AI', 'Antigravity', 'Gemini', 'Google']
+  },
+  {
+    title: 'Prompt API 与 Nano：浏览器里的 AI 革命',
+    description: '当 AI 模型可以直接在浏览器里运行，不需要网络、不需要等待、不需要付费，这意味着什么？这意味着每个人的浏览器都变成了一个小型 AI 实验室。',
+    pubDate: '2025-12-21',
+    url: `${base}/blog/prompt-nano-banana`,
+    tags: ['Nano', 'Prompt API', 'Chrome', 'Edge AI']
+  },
+  {
+    title: 'Chrome DevTools MCP：让 AI 看见你的浏览器',
+    description: '如果说 AI 是一个优秀的程序员，那它之前一直是个"盲人程序员"——只能听你描述问题，却看不见实际情况。Chrome DevTools MCP 改变了这一切，它给 AI 装上了眼睛。',
+    pubDate: '2025-12-21',
+    url: `${base}/blog/chrome-devtools-mcp`,
+    tags: ['MCP', 'DevTools', 'Chrome', 'Debugging']
+  }
+];
+---
+
+<BaseLayout title="首页" description="2025 Google DevFest 技术博客 - 王大波的技术随笔">
+  <section class="hero">
+    <div class="hero-badge">2025 Google DevFest</div>
+    <h1 class="hero-title">代码与文字的交汇处</h1>
+    <p class="hero-subtitle">
+      我是王大波，一个热爱代码与写作的前端工程师。<br/>
+      这里记录着我在 2025 Google DevFest 上的所见所思。
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number">3</span>
+        <span class="stat-label">场演讲</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">∞</span>
+        <span class="stat-label">灵感</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">1</span>
+        <span class="stat-label">杯咖啡</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="posts-section" id="posts">
+    <div class="section-header">
+      <h2>技术随笔</h2>
+      <p class="section-subtitle">关于 AI、浏览器与开发者工具的思考</p>
+    </div>
+    <div class="posts-grid">
+      {posts.map(post => (
+        <PostCard {...post} />
+      ))}
+    </div>
+  </section>
+
+  <style>
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 4rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--color-accent);
+      background: var(--color-bg-tertiary);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid var(--color-border);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--color-text-tertiary);
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    /* Posts Section */
+    .posts-section {
+      padding: 2rem 0;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--color-text-tertiary);
+      margin: 0;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</BaseLayout>
